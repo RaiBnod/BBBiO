@@ -5,15 +5,15 @@
 #include "../src/BBBiO.cpp"
 
 int main() {
-    NUBE::BBBiO myExample;
+    nube::BBBiO myExample;
 
-    NUBE::BBBiO::gpioPin DI1 = myExample.getPin("P9_13");
-    NUBE::BBBiO::gpioPin DI2 = myExample.getPin("P9_15");
-    NUBE::BBBiO::gpioPin DI3 = myExample.getPin("P9_17");
-    NUBE::BBBiO::gpioPin DI4 = myExample.getPin("P9_19");
-    NUBE::BBBiO::gpioPin DI5 = myExample.getPin("P9_23");
-    NUBE::BBBiO::gpioPin DI6 = myExample.getPin("P9_25");
-    NUBE::BBBiO::gpioPin DI7 = myExample.getPin("P9_27");
+    nube::BBBiO::gpioPin DI1 = myExample.getPin("P9_13");
+    nube::BBBiO::gpioPin DI2 = myExample.getPin("P9_15");
+    nube::BBBiO::gpioPin DI3 = myExample.getPin("P9_17");
+    nube::BBBiO::gpioPin DI4 = myExample.getPin("P9_19");
+    nube::BBBiO::gpioPin DI5 = myExample.getPin("P9_23");
+    nube::BBBiO::gpioPin DI6 = myExample.getPin("P9_25");
+    nube::BBBiO::gpioPin DI7 = myExample.getPin("P9_27");
 
     for (int i = 0; i < 1000; i++) {
         std::cout << "DI1: " << (int) myExample.digitalRead(DI1) << std::endl;

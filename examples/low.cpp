@@ -5,10 +5,10 @@
 #include "../src/BBBiO.cpp"
 
 int main() {
-    NUBE::BBBiO myExample;
+    nube::BBBiO myExample;
 
-    NUBE::BBBiO::gpioPin P8_7 = myExample.getPin("P8_7");
-    NUBE::BBBiO::gpioPin P9_11 = myExample.getPin("P9_11");
+    nube::BBBiO::gpioPin P8_7 = myExample.getPin("P8_7");
+    nube::BBBiO::gpioPin P9_11 = myExample.getPin("P9_11");
 
     const unsigned char low = nube::BBBiO::LOW;
 
