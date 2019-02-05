@@ -13,9 +13,25 @@
 #include <sys/mman.h>
 #include <sys/utsname.h>
 
-namespace NUBE {
+namespace nube {
     class BBBiO {
     public:
+        /**
+         * Typedef struct for PWWM pins.
+         *
+         * @member std::string module
+         *   PWM module.
+         * @member char sysfs
+         *   PWM sysfs.
+         * @member char index
+         *   PWM index.
+         * @member char muxMode
+         *   Mux mode value, 0-7. See am335x technical manual.
+         * @member std::string path
+         *   PWM pin path.
+         * @member std::string name
+         *   PWM pin name.
+         */
         typedef struct {
             std::string module;
             unsigned char sysfs;
@@ -25,6 +41,11 @@ namespace NUBE {
             std::string name;
         } gpioPwm;
 
+        /**
+         * Typedef struct for PIN modes.
+         *
+         * The mode name for that pin in the mode being used.
+         */
         typedef struct {
             std::string mode0;
             std::string mode1;
@@ -36,6 +57,37 @@ namespace NUBE {
             std::string mode7;
         } gpioModes;
 
+        /**
+         * Typedef struct for PINs.
+         *
+         * @member std::string name
+         *   The readable pin name. See beaglebone user guide.
+         * @member std::string key
+         *   The pin number identifier, i.e.: P8_3.
+         * @member std::string led
+         *   If a pin has on-board LED.
+         * @member unsigned int gpioBank
+         *   Wich of the four GPIO bank is the pin in.
+         * @member unsigned char gpioPin
+         *   Pin number on the am335x processor.
+         * @member unsigned char bankId
+         *   Pin number within each bank, 0-31.
+         * @member unsigned char eeprom
+         *   Position in EEPROM
+         * @member std::string mux
+         *   Setting mux file name.
+         * @member unsigned int muxRegOffset
+         *   The control module register offset from 0x44E10800 as used in the
+         *   device tree.
+         * @member unsigned char ain
+         *   The ain value, only for analog pins.
+         * @member unsigned short int scale
+         *   The scale value, only for analog pins.
+         * @member gpioPwm pwm
+         *   PWM struct if pwmPresent is TRUE.
+         * @member gpioModes modes
+         *   The pin modes.
+         */
         typedef struct {
             std::string name;
             std::string key;
@@ -70,15 +122,92 @@ namespace NUBE {
 
         ~BBBiO();
 
+        /**
+         * Reads the value from a specified digital pin, either HIGH or LOW.
+         *
+         * @param const gpioPin pin
+         *   The pin you want to read.
+         *
+         * @return unsigned char
+         *   Can return either HIGH or LOW data values.
+         */
+        unsigned char digitalRead(BBBiO::gpioPin pin);
+
+        /**
+         * Reads the value from a specified digital pin, either HIGH or LOW.
+         *
+         * @param std::string pinNumber
+         *   The number of the digital pin you want to read.
+         *
+         * @return unsigned char
+         *   Can return either HIGH or LOW data values.
+         */
         unsigned char digitalRead(std::string pinNumber);
 
+        /**
+         * Write a HIGH or a LOW value to a digital pin.
+         *
+         * @param const gpioPin pin
+         *   The pin whose you wish to write data.
+         * @param const unsigned char pinValue
+         *   HIGH or LOW values.
+         */
+        void digitalWrite(BBBiO::gpioPin pin, unsigned char value);
+
+        /**
+         * Write a HIGH or a LOW value to a digital pin.
+         *
+         * @param std::string pinNumber
+         *   The number of the pin whose you wish to write data.
+         * @param std::string value
+         *   HIGH or LOW values.
+         */
         void digitalWrite(std::string pinNumber, std::string value);
 
+        /**
+         * Get pin from pin number.
+         *
+         * @param std::string pinNumber
+         *   The number of the pin you want to get.
+         *
+         * @return const gpioPin
+         *   The pin data.
+         */
         const gpioPin getPin(std::string pinNumber);
 
+        /**
+         * Configures the specified pin to behave either as an input or an output.
+         *
+         * @param const gpioPin pin
+         *   The number of the pin whose mode you wish to set.
+         * @param const unsigned char direction
+         *   INPUT or OUTPUT modes.
+         * @param unsigned char mux
+         *   Index to mux mode (under development on 3.8 kernel). Default: 7.
+         * @param unsigned char pullup
+         *   'PULLUP', 'PULLDOWN' or 'DISABLED' (under development on 3.8 kernel).
+         *   Default: DISABLED.
+         * @param unsigned char slew
+         *   'FAST' or 'SLOW' (under development on 3.8 kernel). Default: FAST.
+         */
         void pinMode(const gpioPin pin, const unsigned char direction, unsigned char mux = 7,
                      unsigned char pullup = DISABLED, unsigned char slew = FAST);
 
+        /**
+         * Configures the specified pin to behave either as an input or an output.
+         *
+         * @param std::string pinNumber
+         *   The number of the pin whose mode you wish to set.
+         * @param std::string pinDirection
+         *   INPUT or OUTPUT modes.
+         * @param unsigned char pinMux
+         *   Index to mux mode (under development on 3.8 kernel). Default: 7.
+         * @param std::string pinPullup
+         *   'PULLUP', 'PULLDOWN' or 'DISABLED' (under development on 3.8 kernel).
+         *   Default: DISABLED.
+         * @param std::string pinSlew
+         *   'FAST' or 'SLOW' (under development on 3.8 kernel). Default: FAST.
+         */
         void pinMode(std::string pinNumber, std::string pinDirection, unsigned char pinMux = 7,
                      std::string pinPullup = "DISABLED", std::string pinSlew = "FAST");
 

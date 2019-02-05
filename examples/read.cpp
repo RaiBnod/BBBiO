@@ -2,7 +2,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <iostream>
-#include "BBBiO.h"
+#include "../src/BBBiO.cpp"
 
 int main() {
     NUBE::BBBiO myExample;
