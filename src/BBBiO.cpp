@@ -31,40 +31,12 @@ namespace nube {
         }
     }
 
-    unsigned char BBBiO::digitalRead(const BBBiO::gpioPin pin) {
-        // Read the value for this pin.
-        // Read the value for this pin.
+    unsigned char BBBiO::digitalRead(std::string pinNumber) {
+        gpioPin pin = getPin(pinNumber);
         unsigned char value =
                 (mapAddress[(pin.gpioBank - MMAP_OFFSET + GPIO_DATAIN) / GPIO_REGISTER_SIZE] & (1 << pin.bankId))
                         >> pin.bankId;
-
         return value;
-    }
-
-    unsigned char BBBiO::digitalRead(std::string pinNumber) {
-        // Get the gpioPin from pin key.
-        gpioPin pin = getPin (pinNumber);
-
-        // Read the value for that pin and return it.
-        return digitalRead (pin);
-    }
-
-    void BBBiO::digitalWrite(const BBBiO::gpioPin pin, const unsigned char value) {
-        switch (value) {
-            case LOW:
-                // Set LOW value to this pin.
-                mapAddress[(pin.gpioBank - MMAP_OFFSET + GPIO_DATAOUT) / GPIO_REGISTER_SIZE] &= ~(1 << pin.bankId);
-                break;
-
-            case HIGH:
-                // Set HIGH value to this pin.
-                mapAddress[(pin.gpioBank - MMAP_OFFSET + GPIO_DATAOUT) / GPIO_REGISTER_SIZE] |= (1 << pin.bankId);
-                break;
-
-            default:
-                std::cout << "Undefined pinValue: " << value << "!" << std::endl;
-                exit(EXIT_FAILURE);
-        }
     }
 
     void BBBiO::digitalWrite(std::string pinNumber, std::string pinValue) {

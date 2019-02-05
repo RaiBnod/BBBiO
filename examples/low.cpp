@@ -7,13 +7,8 @@
 int main() {
     nube::BBBiO myExample;
 
-    nube::BBBiO::gpioPin P8_7 = myExample.getPin("P8_7");
-    nube::BBBiO::gpioPin P9_11 = myExample.getPin("P9_11");
-
-    const unsigned char low = nube::BBBiO::LOW;
-
-    myExample.digitalWrite(P8_7, low);
-    myExample.digitalWrite(P9_11, low);
+    myExample.digitalWrite("P8_7", "LOW");
+    myExample.digitalWrite("P9_11", "LOW");
 
     myExample.~BBBiO();
 

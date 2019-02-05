@@ -125,17 +125,6 @@ namespace nube {
         /**
          * Reads the value from a specified digital pin, either HIGH or LOW.
          *
-         * @param const gpioPin pin
-         *   The pin you want to read.
-         *
-         * @return unsigned char
-         *   Can return either HIGH or LOW data values.
-         */
-        unsigned char digitalRead(BBBiO::gpioPin pin);
-
-        /**
-         * Reads the value from a specified digital pin, either HIGH or LOW.
-         *
          * @param std::string pinNumber
          *   The number of the digital pin you want to read.
          *
@@ -143,16 +132,6 @@ namespace nube {
          *   Can return either HIGH or LOW data values.
          */
         unsigned char digitalRead(std::string pinNumber);
-
-        /**
-         * Write a HIGH or a LOW value to a digital pin.
-         *
-         * @param const gpioPin pin
-         *   The pin whose you wish to write data.
-         * @param const unsigned char pinValue
-         *   HIGH or LOW values.
-         */
-        void digitalWrite(BBBiO::gpioPin pin, unsigned char value);
 
         /**
          * Write a HIGH or a LOW value to a digital pin.
