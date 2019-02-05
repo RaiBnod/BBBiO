@@ -20,7 +20,7 @@ namespace nube {
     volatile unsigned long int *BBBiO::mapAddress = nullptr;
 
     BBBiO::BBBiO() {
-        mmap();
+        mmap_();
         enableClockModules();
     }
 
@@ -123,7 +123,7 @@ namespace nube {
         }
     }
 
-    void BBBiO::mmap() {
+    void BBBiO::mmap_() {
         int fd = 0;
 
         if ((fd = open("/dev/mem", O_RDWR | O_SYNC)) < 0) {

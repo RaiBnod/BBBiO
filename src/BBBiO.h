@@ -303,7 +303,7 @@ namespace nube {
 
         static std::map<std::string, const gpioPin> initializePins();
 
-        void mmap();
+        void mmap_();
     };
 }
 
