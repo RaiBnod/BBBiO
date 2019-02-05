@@ -104,7 +104,7 @@ namespace nube {
         }
 
         mapAddress = (volatile unsigned long int *) mmap(nullptr, MMAP_SIZE, PROT_READ | PROT_WRITE,
-                                                         MAP_SHARED | MAP_LOCKED, fd, MMAP_OFFSET);
+                                                         MAP_SHARED, fd, MMAP_OFFSET);
 
         if (close(fd) < 0) {
             perror("Unable to close /dev/mem file descriptor");
